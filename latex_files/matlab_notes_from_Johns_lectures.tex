@@ -1,0 +1,92 @@
+\documentclass[12pt]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+
+\title{LaTex Crash Course}
+\author{Tad Riley}
+\date{November 6, 2017}
+
+\begin{document}
+\newpage
+
+\section{MATLAB Notes}
+\subsection{Variable classes}
+\begin{tabular}{|l|l|}
+	\hline
+	Class & Description\\ \hline
+	single and double&Includes arrays\\
+	int8, int16, int32, int64&Signed integers\\
+	char&Character string\\
+	logical&\\
+	sym&Symbolic\\
+	&\\
+	cell&we don't use this\\
+	struct&we don't use this\\
+	$function\_ handle$&we don't use this\\
+	
+	\hline
+\end{tabular}
+
+A double carries 15 to 17 significant digits
+
+\subsection{Structure for conversion specifiers}
+\textbf{\%} starts the conversion specification
+\vskip 0.07in \noindent
+\begin{tabular}{|l|l|}
+	\hline
+	Flags (optional) & Description\\ \hline
+	- & Left justifies\\
+	+ & Always prints the sign\\
+	Space & Inserts a space before value\\
+	0 & Puts zeros in front instead of spaces\\ \hline
+
+\end{tabular}
+\vskip 0.07in \noindent
+	\textbf{Field Width:} (optional) - specifies the minimum numbers of digits to be printed.
+\newline	\textbf{Precision:} (optional) - specifies the number of digits to be printed after  the decimal point.
+\vskip 0.07in \noindent
+\begin{tabular}{|l|l|}
+	\hline
+	Conversion Characters (required) & Description\\ \hline
+	c & Single character\\
+	s & Character string\\
+	d & Signed decimal notation\\
+	e & Fixed-point notation\\
+	g & More compact of e and f\\
+	  & Use matlab help for more\\
+	  \hline
+\end{tabular}
+\vskip 0.07in \noindent
+We can use "escape characters" to control the formatting within a string.
+\newline
+\begin{tabular}{|l|l|}
+	\hline
+	Escape character & Description\\ \hline
+	\textbackslash b & backspace\\
+	\textbackslash n & new line\\
+	\textbackslash t & horizontal tab\\
+	more... & See matlab help\\ \hline
+
+\end{tabular}
+
+\subsection{Logical Class and Operators}
+\begin{tabular}{|l|l|}
+	\hline
+	Class & Description\\ \hline
+	== & Equal\\
+	$\mathtt{\sim}$= & Not equal\\
+	$<$, $<=$ & Less than, less than equal\\
+	$>$ , $>=$ & Greater than, greater than equal\\
+	\& \& & And\\
+	$||$ & Or\\
+	xor(statement1, statement2) & Exclusive Or\\
+
+
+	\hline
+\end{tabular}
+
+\end{document}\grid

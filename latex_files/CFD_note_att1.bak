@@ -1,0 +1,246 @@
+\documentclass{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+%Import color package
+\usepackage{color}
+\usepackage{amssymb}
+\usepackage{stix}
+\usepackage{chngcntr}
+
+%create a new command
+\newcommand{\edit}{\textcolor{red}}	% makes edit{text} red
+
+\counterwithin*{equation}{section}
+\counterwithin*{equation}{subsection}
+
+\title{LaTex Crash Course}
+\author{Tad Riley}
+\date{November 6, 2017}
+
+
+\begin{document}
+
+\section{Equations}%+++++++++++++++++++++++++++++++++++++++++++++++++++++
+\subsection{Compressible}%-----------------------------------------------
+\begin{equation}
+	\rho_{,t} + \sum_{i=1}^3 \begin{bmatrix} \rho u_i \end{bmatrix}_{,i} =0
+\end{equation}
+
+\begin{equation}
+\{pu_j\}_{,t} +\sum_{i=1}^3 \{\rho u_iu_j\}_{,i} +P_{,j}=\sum_{i=1}^3\{\tau _{ij}\}_{,i} +b_j
+\end{equation}
+
+\begin{equation}
+\{\rho e_{tot}\}_{,t} +\sum_{i=1}^3\{\rho u_ie_{tot}\}_{,i}
+\end{equation}
+
+\begin{equation}
+e_{tot}=e+\frac{u_iu_i}{2}
+\end{equation}
+
+$e=c_vT$ 
+\newline$\tau _{ij} = \mu S_{ij}$
+\newline$S_{ij}=(U_{i,j}+u_{j,i} + \frac{\lambda}{\mu} \sum_{k=1}^3u_{k,k}\delta _{ij}$
+\newline$q_i=-\chi T_{,i}$
+\newline$P=\rho RT$
+
+\begin{equation}
+\vec{u}=
+\begin{Bmatrix}
+\rho \\
+\rho \vec{u_i}\\
+\rho e_{tot}\\
+\end{Bmatrix}
+\end{equation}
+
+\begin{equation}
+\vec{F_i}=
+\begin{Bmatrix}
+\rho u_i\\
+\rho u_iu_j\\
+\rho u_ie_{tot}\\
+\end{Bmatrix}+
+\begin{Bmatrix}
+0\\
+P\delta _{ij}\\
+Pu_i\\
+\end{Bmatrix}-
+\begin{Bmatrix}
+0\\ \tau _{ij}\\ u_j\tau _{ij}\\
+\end{Bmatrix}+
+\begin{Bmatrix}
+0\\ 0_j\\q_i\\
+\end{Bmatrix}
+\end{equation}
+
+\begin{equation}
+\vec{F_i^{adv}}=
+\begin{Bmatrix}
+\rho u_i\\
+\rho u_iu_j\\
+\rho u_ie_{tot}\\
+\end{Bmatrix}+
+\begin{Bmatrix}
+0\\
+P\delta _{ij}\\
+Pu_i\\
+\end{Bmatrix}
+\end{equation}
+
+\begin{equation}
+\vec{F_i^{diff}}=~-
+\begin{Bmatrix}
+0\\ \tau _{ij}\\ u_j\tau _{ij}\\
+\end{Bmatrix}+
+\begin{Bmatrix}
+0\\ 0_j\\q_i\\
+\end{Bmatrix}
+\end{equation}
+
+\begin{equation}
+\vec{\mathscr{F}}=\vec{u_{,t}}+\vec{F_{i,i}}=
+\begin{Bmatrix}
+0\\ b _j\\ b_ju _k\\
+\end{Bmatrix}+
+\begin{Bmatrix}
+0\\ 0_j\\r\\
+\end{Bmatrix}
+\end{equation}
+
+\begin{equation}
+\vec{\mathscr{F}}=\frac{\partial \vec{u}}{\partial t}+\frac{\partial \vec{F_1}}{\partial x_1}+\frac{\partial \vec{F_2}}{\partial x_2}+\frac{\partial \vec{F_3}}{\partial x_3
+}
+\end{equation}
+
+
+\newpage
+\subsection{Work Flow}%--------------------------------------------------
+The first thing we have is $\vec{u}_{,t}+\vec{F}_{i,i}-\vec{\mathscr{F}}=0$ which is the \textbf{residual form} of the PDE
+\newline
+Then we introduce a weight vector and contract it with the residual which gives $\vec{W} \cdot (\vec{u}_{,t}+\vec{F}_{i,i}-\vec{\mathscr{F}})=0$
+\vskip 0.05in \noindent We then integrate this over the domain.
+\begin{equation} \tag{*}
+\int_\Omega \vec{W} \cdot (\vec{u}_{,t}+\vec{F}_{i,i}-\vec{\mathscr{F}})d\Omega =0
+\end{equation}
+\newline
+We now look for solutions to (*) such that any $\vec{W}$ is true. We also will use Integration by Parts (IBP) to move derivative from $\vec{F_i}$ to $\vec{W}$. Disributing the weight vector and carrying out IBP yields
+\vskip 0.06in
+$\int_\Omega (\vec{W} \cdot \vec{u}_{,t}+\vec{W}_i\cdot \vec{F}_i-\vec{W}\cdot \vec{\mathscr{F}})d\Omega =0$
+\vskip 0.06in
+\noindent This is known as the Weak Galerkin Form
+
+\noindent
+Next we will assume solutions of the form \indent $\vec{u}(x)=\sum_{A=1}^{n_{np}}N_A(x)\vec{u}_A$
+ for this we use $n_{np} \rightarrow $ number of nodes points, $\vec{u}_A \rightarrow \vec{u}$ at node A, and $N_a \rightarrow$ shape functions
+\newline \noindent
+We mimic this form for the weight vectors $\vec{W}(x)=\sum_{A=1}^{n_{np}}N_B(x)\vec{W}_B$
+
+
+\subsection{New Part}%---------------------------------------------------
+\begin{equation}
+\int_\Omega \vec{W} \cdot (\vec{u}_{,t}+\vec{F}_{i,i}-\vec{\mathscr{F}})d\Omega =0
+\end{equation}
+\begin{equation}
+\vec{u}(x)=\sum_{A=1}^{n_{np}}N_A(x)\vec{u}_A
+\end{equation}
+\begin{equation}
+\vec{W}(x)=\sum_{A=1}^{n_{np}}N_B(x)\vec{W}_B
+\end{equation}
+
+Substituting (2) and (3) into (1) gives
+\begin{equation}
+\int_\Omega \bigg \{ \sum_{B=1}^{n_{np}}N_B\vec{W}_B \cdot \sum_{A=1}^{n_{np}}N_A\vec{u}_{A,t}-\sum_{B=1}^{n_{np}} N_{B,i}\vec{W}_{B} \vec{F}_i -\sum_{B=1}^{n_{np}}N_B\vec{W}_B\vec{\mathscr{F}}\bigg\}d\Omega +\int_\Gamma N_BW_B\vec{F}_in_id\Gamma=0
+\end{equation}
+This is the Weak form with explicit piecewise polynomial substitution for $\vec{u}$ and $\vec{W}$.If we factor out the sum over weights, we have
+\begin{equation}
+\sum_{B=1}^{n_{np}}\vec{W}_B \Bigg \{ \int_\Omega \bigg \{ N_B \cdot \Big[ \sum_{A=1}^{n_{np}}\vec{u}_{A,t}-\vec{\mathscr{F}}\Big]- N_{B,i} \vec{F}_i \bigg\}d\Omega +\int_\Gamma N_B\vec{F}_in_id\Gamma \Bigg \}=0
+\end{equation}
+\noindent
+This reduces to $\sum_{B=1}^{n_{np}}\vec{W}_B \cdot \vec{G}_B$ where $\vec{G}_b=0~\forall B$. This gives 5$n_{np}$ equations for 5$n_{np}$ unknowns, coming from the fact that $\vec{u}_A$ and $\vec{u}_{A,t}$ represent 5$n_{np}$ ODEs
+\vskip 0.08in \noindent \textbf{Note:}$~\vec{u}$ is the solution vector
+\newline $~~~~~~~~~~~ \vec{W}(x)$ is the weight function
+
+
+\subsection{Computational localization}%---------------------------------
+Computationally we must localize the problem to be able to calculate anything. This is mathematically represented as 
+\begin{equation}
+\begin{split}
+\sum_{B=1}^{n_{np}}\vec{W}_B \Bigg \{ \int_\Omega \bigg \{ N_B \cdot \Big[ \sum_{A=1}^{n_{np}}\vec{u}_{A,t}-\vec{\mathscr{F}}\Big]- N_{B,i} \vec{F}_i \bigg\}d\Omega +\int_\Gamma N_B\vec{F}_in_id\Gamma \Bigg \}&=0\\
+\sum_{e=1}^{n_{el}}\sum_{b=1}^{n_{np}}\vec{W}_b \Bigg \{ \int_{\Omega ^e} \bigg \{ N_b \cdot \Big[ \sum_{a=1}^{n_{np}}\vec{u}_{a,t}-\vec{\mathscr{F}}\Big]- N_{b,i} \vec{F}_i \bigg\}d\Omega ^e +\int_{\Gamma ^e} N_b\vec{F}_in_id\Gamma ^e \Bigg \}&=0
+\end{split}
+\end{equation}
+From this we can see that
+\begin{equation}
+\vec{G}_B^e = \int_{\Omega ^e}  \bigg \{ N_b \cdot \Big[ \sum \vec{u}_{a,t}-\vec{\mathscr{F}}\Big]- N_{b,i} \vec{F}_i \bigg\}d\Omega ^e +\int_
+{\Gamma ^e} N_b\vec{F}_in_id\Gamma ^e \Bigg \}=0
+\end{equation}
+\textbf{Note:} that for each local node b of the $e^{th}$ element we have a $\vec{G}_B$ of length 5
+\newline $~~~~~~~~~~~~ N_b(\xi)$ always exists in a mapped (parent) domain, i.e.~~$\xi ~\epsilon ~\left[ 0,1\right]$
+\newline $~~~~~~~~~~~~ \vec{G}_b^e$ represents the residual of the $e^{th}$ element.
+
+\subsection{Stabilization}%----------------------------------------------
+Now we need to add a stability term, as Galerikin's method is stable for diffusion but is unstable for advention. New Galerkin form = Old Galerkin form + $\sum_{e=1}^{n_{el}} \int_{\Omega ^e} \hat{\mathscr{L}^T} \vec{W}\cdot \overset\leftrightarrow{\tau}\{\mathscr{L}\vec{u}-\mathscr{F}\}d\Omega ^e$. Here $\mathscr{L}\vec{u}-\mathscr{F}$ is the full unsteady compressible Navier-Stokes in strong form. We call this a Petrov-Galerkin Method (which is still a weighted residual method). $ \hat{\mathscr{L}}$ and $\mathscr{L}$ are differential operators.
+\newline
+$\mathscr{L}\vec{u}\equiv\vec{u}_{,t}+\vec{F}_{i,i}~~\therefore~\mathscr{L}\vec{u}-\mathscr{F}=0\implies$Which is the PDE residual
+\newline
+$\vec{F}_{i,i}^{adv}=\frac{\partial\vec{F}_i}{\partial\vec{u}}\frac{\partial\vec{u}}{\partial\vec{x}_i}=\overset\leftrightarrow{A}_i\vec{u}_i$ we do this to make $\mathscr{L}$ appear linear. \textbf{Note:} $ \overset\leftrightarrow{A}_i(\vec{u})$ is a 5x5 matrix for each \textit{i}
+\newline
+$\vec{F}_{i,i}^{diff}\equiv - \left[ K_{ij}\vec{u}_{,j} \right]_{,i}~~~~\therefore~~\vec{F}_i^{diff}\equiv - K_{ij}\vec{u}_{,j}~~~~~~$\textbf{Note:} $K_{ij}$ represents 9 5x5 matrices
+\vskip 0.1in \noindent
+In quasi-linear form:
+\begin{equation}
+\mathscr{L}\vec{u}\equiv\vec{u}_{,t}+\overset\leftrightarrow{A}_i\vec{u}_i-\left[ K_{ij}\vec{u}_{,j} \right]_i= \left\lbrace \frac{\partial}{\partial t}+\overset\leftrightarrow{A}_i\frac{\partial}{\partial  x_i}+\frac{\partial}{\partial  x_i}\left[ K_{ij}\frac{\partial}{\partial  x_j} \right]  \right\rbrace \cdot \vec{u}
+\end{equation}
+\begin{equation}
+\mathscr{L}=\frac{\partial}{\partial t}+\overset\leftrightarrow{A}_i\frac{\partial}{\partial  x_i}+\frac{\partial}{\partial  x_i}\left[ K_{ij}\frac{\partial}{\partial  x_j} \right]
+\end{equation}
+$\hat{\mathscr{L}}$ can be defined in different ways to various methods. We wiill study SUPG
+
+%------------------------------------------------------------------------
+\begin{itemize}
+	\item{\makebox[3in]{Galerkin Least Squares (GLS)\hfill} $\hat{\mathscr{L}}=\mathscr{L}$}
+	\item{\makebox[3in]{Streamwise Upwind Petrov-Galerkin (SUPG)\hfill} $\hat{\mathscr{L}}=\overset\leftrightarrow{A}_i\frac{\partial}{\partial  x_i}$}
+	\item{\makebox[3in]{Douglas-Wang \hfill}$\hat{\mathscr{L}}=-\mathscr{L}^*=\frac{\partial}{\partial t}+\overset\leftrightarrow{A}_i\frac{\partial}{\partial  x_i}+\frac{\partial}{\partial  x_i}\left[ K_{ij}\frac{\partial}{\partial  x_j} \right]$}
+\end{itemize}
+
+3. Is the element level residual with SUPG terms, 4. and 5. are expansions contained within 3
+\begin{equation}
+\vec{G}_B^e = \int_{\Omega ^e}   N_b \Big[ \sum \vec{u}_{a,t}-\vec{\mathscr{F}}\Big]- N_{b,i} \vec{F}_i d\Omega ^e +\int_
+{\Gamma ^e} N_b\vec{F}_in_id\Gamma ^e +\int_\square \hat{\mathscr{L}}N_b(\xi)\overset\leftrightarrow{\tau} \{ \mathscr{L}\vec{u}-\mathscr{F}  \} \mathscr{D}(\xi)d\square=0
+\end{equation}
+\begin{equation}
+\mathscr{L}N_b=\overset\leftrightarrow{A}_i\Big(\sum_{a=1}^{n_{en}}N_a\vec{u}_a\Big)N_{b,\xi_l}\xi_{l,i}=\overset\leftrightarrow{A}_i(\vec{u})N_{b,i}
+\end{equation}
+\begin{equation}
+\mathscr{L}\vec{u}=\sum_{a=1}^{n_{en}}N_a\vec{u}_{a,i}^e+\overset\leftrightarrow{A}_i\Big(\sum_{a=1}^{n_{en}}N_a\vec{u}_a\Big)\sum_{c=1}^{n_{en}}\underbrace{N_{c,\xi_l}\xi_{l,i}\cdot\vec{u}_c^e}_{\vec{u}_i}
+\end{equation}
+
+$\hat{\vec{G}}_b=\substack{n_{el}\\ \mathbb{A}\\ {e=1}}\hat{\vec{G}}_b^e$
+
+\section{Variable Mapping}%++++++++++++++++++++++++++++++++++++++++++++++
+\begin{center}
+	\begin{tabular}{ | l | l | l |}
+		\hline
+		Math Notation & Code Var & Summary\\ \hline
+		$ n_{en} $ 		& nshg & shape function gradient\\
+		 				& ndof & Degrees of Freedom at a given node\\
+		$ \vec{Y}_B $ 	& Y(nshg,ndof) & Solution variable vector\\
+		$ \vec{Y}_{A,t} $ & ac & Time derivative of the solution vector\\
+		$ \vec{Y}_{a,t} $ & acl & Time derivative of solution vector locally\\
+		$ \nu $ 		& rmu 	& viscosity\\
+		$ \vec{G}_B $   & res 	& Global Residual\\
+		$ \vec{G}_b^e $ & rl	& Element level residual\\
+		$ u_iu_i $ 		& rk 	& advective velocity\\
+		$ N_a $ 		& shp 	& shape function\\
+		$ N_{a,\xi} $ 	& shgl 	& local gradient of shape function\\
+		e 				& npro 	& Number of elements in a computational block\\
+		$ \underline{\underline{A}}_0Y_{,t}-\mathscr{f} $ & ri &\\
+		$ n_{en} $ 		& nshl 	& number of local shape functions\\ \hline
+
+	\end{tabular}
+\end{center}
+\end{document}

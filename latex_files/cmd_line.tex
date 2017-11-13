@@ -1,0 +1,445 @@
+\documentclass[12pt]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+
+\title{LaTex Crash Course}
+\author{Tad Riley}
+\date{November 6, 2017}
+
+\begin{document}
+\newpage
+\section{The Linux Command Line}%=======================================
+\subsection{Directories}%-----------------------------------------------
+\begin{tabular}{| l | p{4in} |} 
+	\hline
+	Directory & Description\\ \hline
+	/ & Root directory, the top of the tree\\
+	/bin & Contains binaries for system boot and run\\
+	/boot & Contains the linux kernel, inital RAM image, and the boot loader\\
+	/dev & List of all recognized (or understood) devices\\
+	/etc & System wide configuration files. Collection of shell scripts used for boot\\
+	/home & Where normal users can write files\\
+	/lib&shared library files used by the core system programs\\
+	/lost+found & Each partition has this directory. It is mainly used for system recovery\\
+	/media&Contains the mount points for USB devices and CDs\\
+	/mnt & Mount points for manually mounted removable devices\\
+	/opt & Used to install optional (commercial) software\\
+	/proc & Virtual filesystem maintained by the linux kernel\\
+	/root & Home directory for the root account\\
+	/sbin & System binaries which are critical for the system. Typically reserved for the superuser\\
+	/tmp & Intended for temporary files. This directory is cleared every time the system reboots.\\
+	/usr & All programs and support files used by a regular user.\\
+	/usr/bin & Contains the executable programs installed by your linux distro(ubuntu). It is not uncommon for this file to hold thousands of programs.\\
+	/usr/lib & Shared libraries for the programs\\
+	/usr/local & Programs not installed with the distro but intended for system wide use. Directory is empty until system adminstrator makes installations.\\
+	/usr/local/bin & Contains programs compiled from source code\\
+	/usr/sbin & Contains more system administrator programs\\
+	/usr/share & Contains all shared data used by programs in /usr/bin\\
+	/usr/share/doc & Documentation files sorted by package\\
+	/var & Directory where data likely to change is stored. Includes various databases, spool files, user mail, etc.\\
+	/var/log & Contains log files, which are records of various system activity.\\
+	/dev/null & A \textit{bit bucket} which accepts inputs and does nothing with it.\\
+	\hline
+
+\end{tabular}
+
+\subsection{Commands}%--------------------------------------------------
+\noindent\begin{tabular}{| l | l |}
+	\hline
+	Command & Description\\ \hline
+	df & Free space on disk\\
+	free & Free memory\\
+	cal & Calender\\
+	date & Date and time\\
+	pwd & Print working directory\\
+	cd & Change directory\\
+	ls & List directory contents\\
+	la (ls -a)& Shows all contents of the directory including hidden files\\
+	file & Determine file type and presents a brief description of the contents\\
+	less & View file contents, allows for a preview of file contents\\
+	cp & Copy files and directories\\
+	mv & Move/rename files and directories\\
+	mkdir & Make a new directory\\
+	rm & Remove files and directories\\
+	ln & Create hard and soft symbolic links\\
+	type & Displays the kind of command the shell will execute\\
+	which & Determine the location of an executable\\
+	help & Brings up documentation for shell commands\\
+	--help & Displays documentation for execuatables and proper syntax to be used.\\
+	man & Formal manual for command line executables\\
+	apropos & Displays a list of appropriate commands. Same as man -k\\
+	info & Displays a commands info entry\\
+	whatis & Displays a brief description of a command\\
+	alias & Create an alias for a command\\
+	cat & Concatenate files. Displays files without paging\\
+	sort & Sort lines of text\\
+	uniq & Report (-d) or omit (No flag) repeated lines\\
+	wc & Print counts for lines, words, and bytes for each file\\
+	grep & Finds text matching a pattern\\
+	head & Output the first part of a file\\
+	tail & Output the last part of a file\\
+	tee & Read from a standard input and write to a standard output file\\
+	$|$ & "Pipes" a command into another\\
+	echo & Prints a line of text\\
+	clear & Clears the screen\\
+	history & Displays the contents of the history list.\\
+	id & Display user identity.\\
+	chmod & Change a file's mode.\\
+	umask & Set the default file permissions.\\
+	su & Run a shell as another user.\\
+	sudo & Execute a command as another user.\\
+	chown & Change a file's owner.\\
+	chgrp & Change a file's group ownership.\\
+	passwd & Change a user's password.\\
+
+	\hline
+\end{tabular}
+
+\newpage
+\subsection{Keyboard Shortcuts}%+++++++++++++++++++++++++++++++++++++++++
+\subsubsection{Cursor Movement}%-----------------------------------------
+\begin{tabular}{|l|p{5in}|}
+	\hline
+	Keystrokes & Action\\ \hline
+	Ctrl + A & Move cursor to the beggining of the line.\\
+	Ctrl + E & Move cursor to the end of the line.\\
+	Ctrl + F & Move cursor forward one character. Same as right arrow key.\\
+	Ctrl + B & Move cursor backward one character. Same as left arrow key.\\
+	Alt + F  & Move cursor forward one word.\\
+	Alt + B  & Move cursor back one word.\\
+	Ctrl + L & Clear the screen and move the cursor to the top left corner. The clear command does the same thing.\\
+	
+	\hline
+\end{tabular}
+
+\subsubsection{Text Editing Commands}%-----------------------------------
+\begin{tabular}{|l|p{5in}|}
+	\hline
+	Keystrokes & Action\\ \hline
+	Ctrl + D & Delete the character at the cursor location.\\
+	Ctrl + T & Transpose the character at the cursor location with the one preceeding it.\\
+	Alt + T  &  Transpose the word at the cursor location with the one preceeding it.\\
+	Alt + L  &  Convert the characters from the cursor location to the end of the word to lowercase.\\
+	Alt + U  & Convert the characters from the cursor location to the end of the word to uppercase.\\
+	\hline
+\end{tabular}
+
+
+\subsubsection{Cut(\textit{Kill}) and Paste(\textit{Yank}) Commands}%----
+\begin{tabular}{|l|p{5in}|}
+	\hline
+	Keystrokes & Action\\ \hline
+	Ctrl + K & Kill text from cursor location to the end of line.\\
+	Ctrl + U & kill text from cursor location to the beginning of the line.\\
+	Alt + D  & Kill text from the cursor location to the end of the current word.\\
+	Alt + Backspace  & Kill text from the cursor location to the beginning of the current word. If the cursor is at the beginning of a word, kill the previous word.\\
+	Ctrl + Y & Yank text from the kill-ring insert it at the cursor location.\\
+	\hline
+\end{tabular}
+
+\subsubsection{History Commands}%----------------------------------------
+\begin{tabular}{|l|p{5in}|}
+	\hline
+	Keystrokes & Action\\ \hline
+	Ctrl + P & Move to the previous history entry. Same as up arrow.\\
+ 	Ctrl + N & Move to the next history entry. Same as down arrow.\\
+ 	Alt + < & Move to the beginning of the history list.\\
+ 	Alt + > & Move to the end of the history list.\\
+ 	Ctrl + R & Reverse incremental search. Searches incrementally from the current command up the history list.\\
+ 	Alt + P & Reverse search, non-incremental. With this key, type the search string and press \texttt{ENTER} before the search is performed.\\
+ 	Alt + N & Forward search, non-incremental.\\
+ 	Ctrl + O & Execute the current item in the history list and advance to the next one. This is handy if you are trying to re-execute a sequence of commands in the history list.\\
+	\hline
+\end{tabular}
+
+\subsubsection{History Commands}%---------------------------------------
+\begin{tabular}{|l|p{5in}|}
+	\hline
+	Keystrokes & Action\\ \hline
+	!! & Repeat the last command. It is probaly easier to use the up arrow and press \texttt{ENTER}\\
+	!\textit{number} & Repeat history list item \textit{number}\\
+	!\textit{string} & Repeat last history list item starting with \textit{string}\\
+	!?\textit{string} & Repeat last history list item containing \textit{string}\\
+	\hline
+\end{tabular}
+\newpage
+\subsection{Users and Permissions}%++++++++++++++++++++++++++++++++++++++
+\noindent\begin{tabular}{| l | l |}
+	\hline
+	Command & Description\\ \hline
+	id & Display user identity.\\
+	chmod & Change a file's mode.\\
+	umask & Set the default file permissions.\\
+	su & Run a shell as another user.\\
+	sudo & Execute a command as another user.\\
+	chown & Change a file's owner.\\
+	chgrp & Change a file's group ownership.\\
+	passwd & Change a user's password.\\
+	\hline
+\end{tabular}	
+
+\vskip 0.15in
+\noindent \begin{tabular}{|l|p{4in}|}
+	\hline
+	Attribute & File Type\\ \hline
+	- & A regular file.\\
+	d & A directory.\\
+	l & A symbolic link. Notice that with symbolic links, thae remaining file attributes are dummy variables. The real attributes are on the file the link points to.\\
+	c & A \textit{character} special file. This file type refers to a device that handles data as a stream of bytes, such as a terminal or modem.\\
+	b & A \textit{block special file}. This file type refers to a device that handles data in blocks, such as a hard drive or CD-ROM drive.\\
+	\hline
+\end{tabular}
+
+\vskip 0.08in
+\noindent \begin{tabular}{|l|p{3in}|p{3in}|}
+	\hline
+	Attribute & Files & Directories\\ \hline
+	r & Allows a file to be opened and read. & Allows a directory's contents to be listed if the execute attribute is also set.\\
+	w & Allows a file to be written to or truncated; however, this attribute does not allow files to be renamed or deleted. The ability to rename or delete files is determined by directory attributes. & Allows files within a directory to be created or deleted, and renamed if the execute attribute is also set.\\
+	x & Allows a  dile to be treated as a program and executed. Program files written in scripting languages must also be set to readable to be executed. & Allows a directory  to be entered; e.g. cd \textit{directory}\\
+	\hline
+\end{tabular}
+
+\vskip 0.08in
+\noindent \begin{tabular}{|l|p{5in}|}
+	\hline
+	File Attributes & Meaning\\ \hline
+	-rwx------ & A regular file that is readable, writable, and executable by the file's owner. No one else has any access.\\
+	-rw------- & A regular file that is readable and writable by the file's owner. No one else has any access.\\
+	-rw-r--r-- & A regular file that is readable and writable by the file's owner. Members of the file's group may read the file. The file is world readable.\\
+	-rwxr-rx-x & A regular file that is readable, writable, and executable by the file's owner. The file may be read and executed by everybody else.\\
+	-rw-rw---- & A regular file that is readable and writable by the file's owner and members of the file's owner group only.\\
+	lrwxrwxrwx & A symbolic link. All symbolic links have "dummy" permissions. The real permissions are kept with the actual file pointed to by the symbolic link.\\
+	drwxrwx--- & A directory. The owner and the members of the owner group may enter the directory and create, rename, and remove files within the directory.\\
+	drwxr-x--- & A directory. The owner may enter the directory and create, rename, and delete files within the directory. Members of the owner group may enter the directory but cannot create, delete, or rename files.\\
+	\hline
+
+\end{tabular}
+
+
+\newpage
+\subsection{Common shortcuts and flags}%---------------------------------
+
+\noindent\begin{tabular}{| l | l |}
+	\hline
+	Shortcut & Description\\ \hline
+	cd - & Goes to last working directory\\
+	cd $\mathtt{\sim}$username & Goes to the home directory of \textit{username}\\
+	\hline
+\end{tabular}
+
+\vskip 0.15in
+Some Common Options for ls\newline
+\noindent\begin{tabular}{| l | l | p{4in} |}
+	\hline
+	Flags & Long Flag &Purpose\\ \hline
+	-l & & Changes output to long format\\
+	-a & --all & Lists all files including hidden ones\\
+	-d & --directory & Displays details about the directory itself, rather than it's contents\\
+	-F & --classify & Appends an indicator character to the end of each file listed\\
+	-h & --human-readable & Display file sizes in human-readable format rather than bytes\\
+	-r & --reverse & Display results in reverse order\\
+	-S & & Sort results by file size\\
+	-t & & Sort by modification times\\
+	\hline
+	
+
+\end{tabular}
+
+\vskip 0.15in
+Some common cp options\newline
+\noindent\begin{tabular}{|l|l|p{4in}|}
+	\hline
+	Flag & Long Flag & Meaning\\ \hline
+	-a & --archive & Copy the files and directories with all their attributes. This includes ownership and permissions. Normally copy uses default user settings.\\
+	-i & --interactive & Creates an alert before a file is overwritten, which requires user confirmation to continue\\
+	-r & --recursive & Recursively copy directories and their contents. This is required when copying directories.\\
+	-u & --update & Copies only files that don't exist in new location or are newer\\
+	-v & --verbose & Displays info as files are being copied\\ \hline
+
+\end{tabular}
+
+\vskip 0.15in
+Some common mv options\newline
+\noindent\begin{tabular}{|l|l|p{4in}|}
+	\hline
+	Flag & Long Flag & Meaning\\ \hline
+	-i & --interactive & Before overwriting a file, prompt's user for confirmation\\
+	-u & --update & When moving files b/n directories only move new files or files not already in the new location\\
+	-v & --verbose & Display info as move is performed\\ \hline	
+\end{tabular}
+
+\vskip 0.15in
+Some common rm options\newline
+\noindent\begin{tabular}{|l|l|p{4in}|}
+	\hline
+	Flag & Long Flag & Meaning\\ \hline
+	-i & --interactive & Before overwriting a file, prompt's user for confirmation\\
+	-r & --recursive & Recursively copy directories and their contents. This is required when copying directories.\\
+	-f & --force & Ignores nonexistent files and doesn't prompt user. This flag overwrites -i\\
+	-v & --verbose & Display info as move is performed\\ \hline		
+	
+\end{tabular}
+	
+
+\newpage
+\subsection{Manipulating Files and Directories}%-------------------------
+
+First some notes:\newline
+Wildcards can be used with any command that accepts filenames as arguments.\newline
+
+\noindent\begin{tabular}{|l|l|}
+	\hline
+	* & Any characters\\
+	? & Any single character\\
+	$[characters]$ & Any character that is a member of the set \textit{characters}\\
+	$[!characters]$ & Any character that is not a member of the set of \textit{characters}\\
+	$[[:class]]$ & Any character that is amember of the specified \textit{class}\\
+	
+	\hline
+
+\end{tabular}
+
+\vskip 0.5in
+
+Some commonly used character classes are:\newline
+
+\noindent\begin{tabular}{| l | p{4in} |}
+	\hline
+	Character class & Meaning\\ \hline
+	$[:alnum:]$ & Any alphanumeric number\\
+	$[:alpha:]$ & Any alphabetic character\\
+	$[:digit:]$ & Any numeral\\
+	$[:lower:]$ & Any lowercase letter\\
+	$[:upper:]$ & Any uppercase letter\\ \hline
+\end{tabular}
+
+\vskip 0.2in
+
+Examples of using these wildcards with character classes are included below:\newline
+\noindent\begin{tabular}{|l|p{4in}|}
+	\hline
+	* & All files\\
+	&\\
+	g* & Any file beginning with g\\&\\
+	b*.txt & Any file beginning with b followed by any characters and ending with .txt\\
+	Data??? & Any file beginning with Data and followed by any three characters\\
+	$[abc]*$ & Any file beginning with a, b, or c\\&\\
+	$BACKUP.[0-9][0-9][0-9]$ & Any file beginning with BACKUP and followed by exactly three numerals\\
+	$[[:upper:]]*$ & Any file beginning with an uppercase letter\\&\\
+	$[![:digit:]]*$ & Any file not starting with a numeral\\&\\
+	$*[[:lower:]123]$ & Any file ending with a lowercase letter \textbf{or} the numerals 1,  2, 3\\ \hline
+
+\end{tabular}
+
+\subsection{Seeing the world as the shell does}
+\begin{tabular}{|l|p{3in}|p{2in}|}
+	\hline
+	Expansion type & Purpose & Example\\ \hline
+	Pathname & Using * in paths to collect all files and directories with a common pattern & echo D*\\
+	Tilde & Expands into the home directory & echo ~\\
+	Arithmetic & Allows arithmetic to be performed within \$((-)) & echo \$((2+2))\\
+	Brace & Creates multiple text strings from a pattern containing braces & echo Number\_\texttt{\{1..5\}} \\
+	Command Substitution & Use the output of a command as an expansion & ls -l \$(which cp) ~~~\newline ls -l `which cp`;
+	uses \textit{back quotes}\\
+	Double Quotes & Supresses word splitting, pathname expansion, tilde expansion, and brace expansion & mv "two words.txt" ... \newline two\_ words.txt\\
+	Single quotes & Supress all expansions & echo text /*.txt {a,b} \$(echo foo) \$((2+2)) \$USER\\
+	
+	\hline
+\end{tabular}
+
+
+\subsection{Other Useful Info}%-----------------------------------------
+
+\subsubsection{man pages}%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\begin{tabular}{|l|l|}
+	\hline
+	Section & Contents\\ \hline
+	1 & User commands. This is the default selection\\
+	2 & Programming interfaces for kernel system calls\\
+	3 & Programming interfaces to the C library\\
+	4 & Special files such as device nodes and drivers\\
+	5 & File formats\\
+	6 & Games and amusements such as screensavers\\
+	7 & Miscellaneous\\
+	8 & System administrator commands\\ \hline
+
+\end{tabular}
+
+\vskip 0.15in
+\subsubsection{info commands}%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\begin{tabular}{|l|p{3.3in}|}
+	\hline
+	Command & Action\\ \hline
+	? & Display command help\\
+	\texttt{PAGE UP} or \texttt{BACKSPACE} & Display previous page.\\
+	\texttt{PAGE DOWN} or \texttt{SPACEBAR} & Display next page.\\
+	n & Next - Display the next node\\
+	p & Previous - Display the previous node\\
+	u & Up - Display the parent node of the currently displayed node. This is typically a menu\\
+	\texttt{ENTER} & Follow the hyperlink at the cursor location\\
+	q & Quit\\ \hline
+	
+
+\end{tabular}
+
+\vskip 0.15in
+\subsubsection{Redirection Operators}%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\begin{tabular}{|l|l|}\hline
+	Operator & Meaning\\ \hline
+	0 & References \textit{stdin}\\
+	1 & References \textit{stdout}\\
+	2 & References \textit{stderr}\\
+	$ > $ & Redirection operator, acts of \textit{stdout}\\
+	$ >> $ & Appended redirection operator, acts on \textit{stdout}\\
+	$2>$ & Redirects \textit{stderr}\\
+	$\&>$ & Redirects \textit{stdout} and \textit{stderr} at once\\
+	
+	
+	
+	
+	\hline
+
+\end{tabular}
+
+\vskip 0.15in
+\subsubsection{Escape Sequences}
+\begin{tabular}{|l|p{1.5in}|}
+	\hline
+	\textbf{Escape} & \textbf{Description}\\ \hline
+	\textbackslash\textbackslash & Backslash\\
+	\textbackslash ' & Single-quote\\
+	\textbackslash " & Double-quote\\
+	\textbackslash a & Bell (will cause the computer to beep)\\
+	\textbackslash b & Backspace\\
+	\textbackslash f & Formfeed\\
+	\textbackslash n & Newline\\
+	\textbackslash r & Carriage\\
+	\textbackslash t & Tab\\
+	\textbackslash v & Vertical tab\\
+	
+	\hline
+\end{tabular}
+
+
+
+
+
+\vskip 0.15in
+\noindent\begin{tabular}{| l | l |}
+	
+	\hline
+	$\mathtt{\sim}$ & This is a useful shortcut to get to the home directory\\
+	/dev/null & A bit bucket which can be used to supress errors\\
+
+	
+	
+	\hline
+
+\end{tabular}
+
+\end{document}

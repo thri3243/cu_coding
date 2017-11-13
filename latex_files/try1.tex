@@ -1,0 +1,150 @@
+\documentclass[12pt]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+%Import color package
+\usepackage{color}
+\usepackage{amssymb}
+%create a new command
+\newcommand{\edit}{\textcolor{red}}	% makes edit{text} red
+
+\title{LaTex Crash Course}
+\author{Tad Riley}
+\date{November 6, 2017}
+
+
+\begin{document}
+
+\maketitle
+
+\newpage
+\tableofcontents
+\newpage
+
+\begin{abstract}
+The abstract will be written here
+\end{abstract}
+
+\section{Introduction} % ==========================
+Introduction paragraph
+\label{sec:intro}
+
+
+\subsection{subsection} % ----------------
+subsection work
+
+\subsubsection{subsub work} % ^^^^^^^^^^^^^^^^^^^^^^^^
+for really detailed work
+
+\begin{itemize}
+\item bullet point one
+\item bullet point two
+\end{itemize}
+
+\begin{enumerate}
+\item problem 1
+\item problem 2 which has subproblem
+	\begin{enumerate}
+	\item subproblem 1
+	\item subproblem 2
+		\begin{enumerate}
+		\item a b c?
+		\end{enumerate}
+	\end{enumerate}
+\end{enumerate}
+
+
+\section{paragraphs} %========================
+A double space creates a patagraph
+
+This is now goin to be indented. here is the rest of the paragraph bla bla bla bla bla bla bla bla bla bla bla bla bla blabla blabla blabla blabla blabla bla bla bla 
+
+%<\\> make the paragraph single spaced
+
+This will not be indented\\
+Neither will this
+This will appear on the same line
+
+
+Text emphasis: \\
+you can \textbf{bold}, \textit{italics}, \underline{underline}, or a \textbf{\textit{combo}}.
+You can also use {\bf bolding} and {\it italicize}.
+
+Or you may need to write in \texttt{typewriter}
+
+Referencing is great! Like for Section \ref{sec:intro}
+
+We can make our text\textcolor{red}{red} or \textcolor{blue}{blue} or messing with people you can \textcolor{yellow}{green}
+
+We can also try out the new command and edit \edit{text}
+
+
+\newpage
+\section{Math Mode} % ====================================
+
+LaTex is pretty amazing with math!
+
+We'll start with a sum:
+\begin{equation}
+f(x)=a_0 + a_1x+a_2x^2 + \dots + a_nx^n = \sum_{i=0}^n a_ix^i~\forall
+~ x \in \mathbb{R}
+\label{eq:sum}
+\end{equation}
+
+Another math great thing is matrices
+\begin{equation}
+\pmb{r}=\begin{bmatrix}
+x \\
+y \\
+z \\
+\end{bmatrix}
+\end{equation}
+and 
+\begin{equation}
+\pmb{\bar{P}}=\begin{pmatrix}
+\sigma_x^2 & \rho_{xy}\sigma_x\sigma_y\\
+\rho_{xy}\sigma_x\sigma_y & \sigma_y^2
+\end{pmatrix}
+\end{equation}
+
+We can reference Equation \ref{eq:sum}.
+
+\begin{equation}
+\underbrace{Group~of~terms}
+\end{equation}
+
+We also can use inline equation format $[x,~y,~z]^T$ is my vector and $\Delta V$ is my velocity.
+
+The kronecker-delta is written as $\delta _{ij}$
+
+\begin{center}
+$x=-b \pm \displaystyle \frac{\sqrt{b^2-4ac}}{2a}$
+\end{center}
+
+Sometimes we want to align our equations,
+\begin{align}
+\dot{\pmb{x}} &= [A]\pmb{x}\\
+\pmb{y} &=\tilde{H}\pmb{x} + \pmb{\epsilon}
+\end{align}
+
+\begin{tabular}{ | l | l | l |}
+		\hline
+		Math Notation & Code Var & Summary\\ \hline
+		$ n_{en} $ & nshg & shape function gradient\\
+		 & ndof & Degrees of Freedom at a given node\\
+		$ \vec{Y}_B $ & Y(nshg,ndof) & Solution variable vector\\
+		$ \vec{Y}_{A,t} $ & ac & Time derivative of the solution vector\\
+		$ N_a $ & shp & shape function\\
+		$ N_{a,\xi} $ & shgl & local gradient of shape function\\
+		e & npro & Number of elements in a computational block\\
+		$ n_{en} $ & nshl & number of local shape functions\\ \hline
+
+\end{tabular}
+
+
+
+
+\end{document}
