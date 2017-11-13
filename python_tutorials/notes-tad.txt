@@ -1,0 +1,140 @@
+Installing pip:
+
+  apt install python3-pip
+
+Installing python packages with pip:
+
+  pip install <package>
+
+Installing specific version of a python package with pip:
+
+  pip install <package>==<version_number>
+
+Install virtualenv:
+
+  pip install virtualenv
+
+Virtual environments:
+
+Creates an environments where packages specific to your project can be installed
+so they don't clutter up you global python package install location.
+
+Creating a virtual environment:
+
+  virtualenv venv
+
+Specifying a version of python within your virtual environment:
+
+  virtualenv -p /usr/bin/python3
+
+Allowing for the usage of system package
+
+Entering your environment:
+
+  source venv/bin/activate
+
+Where the packages come from:
+
+  https://pypi.python.org/pypi
+
+Python package layout:
+
+  - To make a python package a module, it is as easy a creating an __init__.py
+    file in the appropriate location.
+  - Here is the layout of a python package with multiple submodules:
+
+  MyProjectDirectory/
+    myPythonModule/
+      __init__.py
+      myModuleScript0.py
+      myModuleScript1.py
+      myPythonSubModule/
+        __init__.py
+        mySubmoduleScript0.py
+        mySubmoduleScript1.py
+    tests/
+      test0.py
+      test1.py
+    images/
+      image0.png
+
+Running your own package:
+
+  - You want to always run your package from the top-level directory of your
+    project so for the above example you would want to change your directory
+    to be within 'MyProjectDirectory'.
+
+Making your package distributable and installable via pip:
+
+  - This is simple as creating a file called setup.py:
+
+  MyProjectDirectory
+    setup.py
+    myPythonModule
+      __init__.py
+      myPythonModule
+        myModuleScript0.py
+        myModuleScript1.py
+        myPythonSubModule
+          __init__.py
+          mySubmoduleScript0.py
+          mySubmoduleScript1.py
+
+  - In this file you can specify the details of your project and what other
+    packages it depends on. Here is an example of a 'setup.py'.
+  - Here is an example of the contents of a 'setup.py':
+
+  from distutils.core import setup
+
+  setup(
+      name='My Package Name',
+      discription='This package is the bomb. It does lots of cool stuff.'
+      install_requires=[
+          'astroid',
+          'glfw=>1.4.0',
+          'isort=>4.2.15',
+          'lazy-object-proxy=>1.3.1',
+          'mccabe=>0.6.1',
+          'nine=>1.0.0',
+          'numpy=>1.13.3',
+          'numpy-stl=>2.3.2',
+          'py=>1.4.34',
+          'PyAudio=>0.2.11',
+          'pylint=>1.7.4',
+          'PyOpenGL=>3.1.1a1',
+          'PyOpenGL-accelerate=>3.1.1a1',
+          'pytest=>3.2.3',
+          'python-utils=>2.2.0',
+          'python-xlib=>0.20',
+          'scikit-learn=>0.19.1',
+          'scipy=>1.0.0',
+          'six=>1.11.0',
+          'sklearn=>0.0',
+          'wrapt=>1.10.11'
+      ]
+  )
+
+  - For more just Google python setup and read the documentation.
+  - Now you can install your package with the following:
+
+  pip install .
+
+Fixing pylint to work within a virtual environment in Atom:
+
+  - Pylint gets confused about what python version you're using and tries to
+    check your code for mistakes using the system site-packages even inside of
+    your virtual environment.
+  - To solve this you should:
+    - Install pylint inside of your virtual environment.
+    - Open Edit > Preferences > Packages.
+    - Search pylint.
+    - Open pylint's Settings.
+    - Change the "Executable Path" to "%p/venv/bin/pylint".
+    - Change Python Path to "%p".
+  - Now any import error you were seeing before should be fixed if you have
+    the proper packages installed in you virtual environment.
+
+Convenient Linux commands:
+
+  - A tree view of your file system: tree
+  - Output what shell you're using: echo $0
